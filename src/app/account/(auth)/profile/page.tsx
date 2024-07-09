@@ -28,7 +28,7 @@ const Profile = async () => {
 export default function ProfilePage() {
   return (
     <>
-      <h1 className="my-5 text-2xl font-bold">Profile</h1>
+      <h1 className="md:my-5 my-2 text-2xl font-bold">Profile</h1>
       <Suspense fallback={<ProfileSkeleton />}>
         <Profile />
       </Suspense>

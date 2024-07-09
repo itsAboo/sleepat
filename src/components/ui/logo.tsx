@@ -18,12 +18,12 @@ export default function Logo() {
   if (!isMount) return <div></div>;
 
   return (
-    <Link href="/" className="h-full bg-red-500">
+    <Link href="/" className="h-full w-[65px] relative">
       <Image
         src={resolvedTheme === "light" ? logo : logoDark}
         alt="logo"
         priority
-        className="h-full w-full"
+        fill
       />
     </Link>
   );

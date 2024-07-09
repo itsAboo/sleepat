@@ -10,8 +10,8 @@ const MyAccommodation = async () => {
 
 export default function MyAccommodationPage() {
   return (
-    <div className="mt-5">
-      <h1 className="mb-5 text-2xl font-bold">My Accommodation</h1>
+    <div className="md:mt-5 mt-2">
+      <h1 className="md:mb-5 mb-2 text-2xl font-bold">My Accommodation</h1>
       <Suspense fallback={<MyAccommodationSkeleton />}>
         <MyAccommodation />
       </Suspense>

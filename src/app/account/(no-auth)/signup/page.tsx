@@ -86,7 +86,7 @@ export default function Signup() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-[500px] mt-8 border p-6 rounded-sm shadow-sm">
+    <div className="mx-auto max-w-[500px] md:mt-8 mt-2 border p-6 rounded-sm shadow-sm">
       <h1 className="text-2xl font-bold mb-5">Sign up</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)}>

@@ -18,7 +18,7 @@ export default async function EditAccommodation({
   }
   return (
     <>
-      <h1 className="text-2xl font-bold my-5">Edit your accommodation</h1>
+      <h1 className="text-2xl font-bold my-2 md:my-5">Edit your accommodation</h1>
       <AccommodationEditForm accommodation={accommodation} />
     </>
   );
