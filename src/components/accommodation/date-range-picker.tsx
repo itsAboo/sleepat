@@ -58,10 +58,11 @@ export default function DateRangePicker({
         </PopoverTrigger>
         <PopoverPortal>
           <PopoverContent
-            className="w-auto p-0 flex flex-col items-end"
-            align="start"
+            className="sm:w-auto sm:h-auto sm:relative sticky w-screen  p-0 flex flex-col items-end"
+            align="center"
           >
             <Calendar
+              className="w-full h-full  flex justify-center"
               initialFocus
               mode="range"
               defaultMonth={date?.from}
@@ -71,7 +72,7 @@ export default function DateRangePicker({
               disabled={disabledDates!}
               numberOfMonths={2}
             />
-            <PopoverClose className="mr-3 mb-3">
+            <PopoverClose className="sm:mr-3 mr-6 mb-2 sm:mb-3">
               <p className="hover:bg-primary/20 rounded-md p-2">Close</p>
             </PopoverClose>
           </PopoverContent>
