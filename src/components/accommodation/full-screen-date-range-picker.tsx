@@ -22,7 +22,7 @@ export default function FullScreenDateRangePicker({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-background z-[60] overflow-y-auto">
+    <div className="fixed inset-0 bg-background z-50 overflow-y-auto">
       <div className="flex flex-col h-full">
         <div className="flex justify-between items-center p-4 border-b">
           <h2 className="text-lg font-semibold">Select Date</h2>
