@@ -11,7 +11,7 @@ export default async function Header() {
   const { user } = await getUser();
 
   return (
-    <header className="border-b flex justify-center sticky top-0 left-0 right-0 z-50 bg-inherit">
+    <header className="border-b flex justify-center sticky top-0 left-0 right-0 z-[666] bg-inherit">
       <nav className="md:container px-2 w-full flex justify-between items-center h-16">
         <Logo />
         <div className="flex items-center">
