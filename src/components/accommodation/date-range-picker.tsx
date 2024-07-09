@@ -93,7 +93,7 @@ export default function DateRangePicker({
                 disabled={disabledDates}
                 numberOfMonths={2}
               />
-              <PopoverClose className="absolute top-1 right-1">
+              <PopoverClose className="flex justify-end w-full">
                 <p className="hover:bg-primary/20 rounded-md p-2">Close</p>
               </PopoverClose>
             </PopoverContent>
