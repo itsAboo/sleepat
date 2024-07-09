@@ -58,7 +58,7 @@ export default function DateRangePicker({
         </PopoverTrigger>
         <PopoverPortal>
           <PopoverContent
-            className="sm:w-auto sm:h-auto sm:relative sticky w-screen  p-0 flex flex-col items-end"
+            className="sm:w-auto sm:h-auto top-0 sm:relative sticky w-screen  p-0 flex flex-col items-end"
             align="center"
           >
             <Calendar
