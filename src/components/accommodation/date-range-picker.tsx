@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
@@ -13,6 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { PopoverClose, PopoverPortal } from "@radix-ui/react-popover";
+import FullScreenDateRangePicker from "./full-screen-date-range-picker";
 
 interface DatePickerProps {
   className?: string;
@@ -29,12 +30,36 @@ export default function DateRangePicker({
   disabledDates,
   isError,
 }: DatePickerProps) {
+  const [isFullScreenOpen, setIsFullScreenOpen] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => setIsMobile(window.innerWidth < 640);
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  const handleClick = useCallback(() => {
+    if (isMobile) {
+      setIsFullScreenOpen(true);
+    } else {
+      setIsPopoverOpen(true);
+    }
+  }, [isMobile]);
+
+  const handleSelect = (newDate: DateRange | undefined) => {
+    onSelect(newDate);
+  };
+
   return (
     <div className={cn("grid gap-2", className)}>
-      <Popover>
-        <PopoverTrigger>
-          <div
+      <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+        <PopoverTrigger asChild>
+          <button
             id="date"
+            onClick={handleClick}
             className={cn(
               "w-full flex justify-start items-center border p-2 rounded-md text-left font-normal",
               !date && "text-muted-foreground",
@@ -54,30 +79,35 @@ export default function DateRangePicker({
             ) : (
               <span>Pick a date</span>
             )}
-          </div>
+          </button>
         </PopoverTrigger>
-        <PopoverPortal>
-          <PopoverContent
-            className="sm:w-auto sm:h-auto top-0 sm:relative sticky w-screen  p-0 flex flex-col items-end"
-            align="center"
-          >
-            <Calendar
-              className="w-full h-full  flex justify-center"
-              initialFocus
-              mode="range"
-              defaultMonth={date?.from}
-              fromDate={new Date()}
-              selected={date}
-              onSelect={onSelect}
-              disabled={disabledDates!}
-              numberOfMonths={2}
-            />
-            <PopoverClose className="sm:mr-3 mr-6 mb-2 sm:mb-3">
-              <p className="hover:bg-primary/20 rounded-md p-2">Close</p>
-            </PopoverClose>
-          </PopoverContent>
-        </PopoverPortal>
+        {!isMobile && (
+          <PopoverPortal>
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="range"
+                defaultMonth={date?.from}
+                fromDate={new Date()}
+                selected={date}
+                onSelect={handleSelect}
+                disabled={disabledDates}
+                numberOfMonths={2}
+              />
+              <PopoverClose className="absolute top-1 right-1">
+                <p className="hover:bg-primary/20 rounded-md p-2">Close</p>
+              </PopoverClose>
+            </PopoverContent>
+          </PopoverPortal>
+        )}
       </Popover>
+
+      <FullScreenDateRangePicker
+        isOpen={isFullScreenOpen}
+        onClose={() => setIsFullScreenOpen(false)}
+        date={date}
+        onSelect={handleSelect}
+        disabledDates={disabledDates}
+      />
     </div>
   );
 }
