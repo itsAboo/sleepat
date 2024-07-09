@@ -149,7 +149,7 @@ export default function RoomBookingModal({
   return (
     <>
       <Dialog modal={false} open={open} onOpenChange={setOpen}>
-        <DialogContent className="overflow-hidden p-0 flex flex-col xl:flex-row justify-between xl:max-w-screen-xl h-[70%] md:max-w-screen-md">
+        <DialogContent className="overflow-hidden p-0 flex flex-col xl:flex-row justify-between xl:max-w-screen-xl h-full md:h-[70%] sm:max-w-screen-sm md:max-w-screen-md">
           <div className="xl:w-2/3 w-full xl:h-auto h-[350px] relative">
             <Image
               className="object-cover"
