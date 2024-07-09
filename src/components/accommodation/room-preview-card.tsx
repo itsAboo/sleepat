@@ -49,7 +49,7 @@ export default function RoomPreviewCard({
           type="button"
           size="icon"
           variant="ghost"
-          className="absolute z-50 bottom-1 right-1"
+          className="absolute z-40 bottom-1 right-1"
           onClick={() => setOpen(true)}
         >
           <span>
@@ -73,7 +73,7 @@ export default function RoomPreviewCard({
           type="button"
           size="icon"
           variant="ghost"
-          className="absolute z-50 bottom-1 right-12"
+          className="absolute z-40 bottom-1 right-12"
           onClick={() => setEditOpen(true)}
         >
           <span>
