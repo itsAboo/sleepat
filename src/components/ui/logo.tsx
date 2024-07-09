@@ -18,7 +18,7 @@ export default function Logo() {
   if (!isMount) return <div></div>;
 
   return (
-    <Link href="/" className="h-full">
+    <Link href="/" className="h-full bg-red-500">
       <Image
         src={resolvedTheme === "light" ? logo : logoDark}
         alt="logo"
