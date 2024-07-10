@@ -58,7 +58,7 @@ export const GET = async (req: Request) => {
     const bookings = await Booking.find({
       userId: user.id,
       userEmail: user.email,
-    });
+    }).lean();
 
     const bookingsWithUser = await User.populate(bookings, {
       path: "userId",
@@ -73,7 +73,6 @@ export const GET = async (req: Request) => {
         select: "name address city state country amenities image rooms",
       }
     )) as IBookingDoc[];
-
     const formatBookings = bookingsWithUserAndAccommodation.map((booking) => {
       const room = booking.accommodationId.rooms.find(
         (room) => room._id?.toString() === booking.roomId
