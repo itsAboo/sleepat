@@ -18,3 +18,5 @@ export default function MyAccommodationPage() {
     </div>
   );
 }
+
+export const dynamic = "force-dynamic";
