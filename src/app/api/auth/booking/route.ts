@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/mongoose";
 import { validateRequest } from "@/lib/lucia";
 import Booking from "@/models/booking.model";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Accommodation, { IRoom } from "@/models/accommodation.model";
 
 interface IBookingDoc {
@@ -39,16 +39,17 @@ interface IBookingDoc {
   updatedAt: Date;
 }
 
-export const GET = async (req: Request) => {
-  if (!req.headers.get("Authorization")) {
-    return NextResponse.json(
-      { message: "Authorization is required" },
-      { status: 400 }
-    );
-  }
-  const authSession = req.headers.get("Authorization")?.split(" ")[1];
-  const sessionId = JSON.parse(authSession as string).value;
-  const { user } = await validateRequest(sessionId);
+export const GET = async (req: NextRequest) => {
+  // if (!req.headers.get("Authorization")) {
+  //   return NextResponse.json(
+  //     { message: "Authorization is required" },
+  //     { status: 400 }
+  //   );
+  // }
+  // const authSession = req.headers.get("Authorization")?.split(" ")[1];
+  const authSession = req.cookies.get("auth_session");
+  const sessionId = authSession?.value;
+  const { user } = await validateRequest(sessionId!);
   if (!user) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }

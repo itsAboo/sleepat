@@ -26,13 +26,7 @@ export const getAllMyAccommodation = async () => {
 
 export const getAllMyBooking = async () => {
   try {
-    const response = await fetch(`${process.env.AUTH_API}/booking`, {
-      headers: {
-        Authorization: `Bearer ${JSON.stringify(
-          cookies().get(lucia.sessionCookieName)
-        )}`,
-      },
-    });
+    const response = await fetch(`${process.env.AUTH_API}/booking`);
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.message);
