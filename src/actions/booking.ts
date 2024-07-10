@@ -27,19 +27,23 @@ export const createBooking = async (
   if (!date.from || !date.to) {
     throw new Error("Date range is required");
   }
-  const roomBookingDates = accommodation.bookings?.map((booking) => ({
-    startDate: booking.startDate,
-    endDate: booking.endDate,
-  }));
-  
-
-  const isDateOverlap = checkDateOverlap(date.from, date.to, roomBookingDates!);
-  if (isDateOverlap) {
-    throw new Error("Date has overlap");
-  }
 
   try {
     await dbConnect();
+    const roomBookings = await Booking.find({ roomId: room._id });
+    const roomBookingDates = roomBookings?.map((booking) => ({
+      startDate: booking.startDate,
+      endDate: booking.endDate,
+    }));
+
+    const isDateOverlap = checkDateOverlap(
+      date.from,
+      date.to,
+      roomBookingDates!
+    );
+    if (isDateOverlap) {
+      throw new Error("Date has overlap");
+    }
     const days = differenceInCalendarDays(date.to, date.from);
     const totalPrice = room.pricePerNight! * days;
 
