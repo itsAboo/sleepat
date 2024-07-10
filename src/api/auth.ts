@@ -40,7 +40,6 @@ export const getAllMyBooking = async () => {
     const data = await response.json();
     return data.bookings as IBooking[];
   } catch (error: any) {
-    console.error("Error on getAllMyBooking");
     console.log(error);
     throw error;
   }

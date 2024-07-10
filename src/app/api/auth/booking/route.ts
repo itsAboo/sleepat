@@ -89,7 +89,6 @@ export const GET = async (req: Request) => {
     return NextResponse.json({ bookings: formatBookings }, { status: 200 });
   } catch (error: any) {
     console.log(error);
-    console.error("Error on mybooking api");
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 };
