@@ -163,7 +163,7 @@ export default function AddRoomModal({
 
   return (
     <Dialog onOpenChange={setOpen} open={open}>
-      <DialogContent className="max-w-screen-lg max-h-[80%] overflow-y-scroll">
+      <DialogContent className="max-w-screen-lg h-full md:max-h-[80%] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Create room</DialogTitle>
           <DialogDescription>create your room</DialogDescription>
@@ -184,7 +184,7 @@ export default function AddRoomModal({
                 </FormItem>
               )}
             />
-            <div className="flex gap-3">
+            <div className="flex md:flex-row flex-col md:gap-3">
               <FormField
                 control={form.control}
                 name="size"
@@ -261,7 +261,7 @@ export default function AddRoomModal({
                 </FormItem>
               )}
             />
-            <div className="flex gap-3">
+            <div className="flex md:flex-row flex-col md:gap-3">
               <FormField
                 control={form.control}
                 name="bedCount"

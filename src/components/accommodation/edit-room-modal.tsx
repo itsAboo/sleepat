@@ -165,7 +165,7 @@ export default function EditRoomModal({
 
   return (
     <Dialog onOpenChange={setOpen} open={open}>
-      <DialogContent className="max-w-screen-lg max-h-[80%] overflow-y-scroll">
+      <DialogContent className="max-w-screen-lg md:max-h-[80%] h-full overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Edit room</DialogTitle>
           <DialogDescription>edit your room</DialogDescription>
@@ -186,7 +186,7 @@ export default function EditRoomModal({
                 </FormItem>
               )}
             />
-            <div className="flex gap-3">
+            <div className="flex md:flex-row flex-col md:gap-3">
               <FormField
                 control={form.control}
                 name="size"
@@ -257,7 +257,7 @@ export default function EditRoomModal({
                 </FormItem>
               )}
             />
-            <div className="flex sm:flex-row flex-col gap-3">
+            <div className="flex md:flex-row flex-col md:gap-3">
               <FormField
                 control={form.control}
                 name="bedCount"

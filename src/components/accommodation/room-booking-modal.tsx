@@ -132,7 +132,7 @@ export default function RoomBookingModal({
     <>
       <Dialog modal={false} open={open} onOpenChange={setOpen}>
         <DialogContent className="overflow-hidden p-0 flex flex-col xl:flex-row justify-between xl:max-w-screen-xl h-full md:h-[70%] sm:max-w-screen-sm md:max-w-screen-md">
-          <div className="xl:w-2/3 w-full z-[70] xl:h-auto h-[350px] relative">
+          <div className="xl:w-2/3 w-full xl:h-auto h-[350px] relative">
             <Image
               className="object-cover"
               fill
@@ -141,7 +141,7 @@ export default function RoomBookingModal({
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
-          <div className="xl:w-1/3 xl:p-3 xl:pl-1 xl:py-4 px-4 pb-4 overflow-y-scroll">
+          <div className="xl:w-1/3 xl:p-3 xl:pl-1 xl:py-4 px-4 pb-4 overflow-y-auto">
             <h1 className="text-2xl font-bold">{room.name}</h1>
             <hr className="my-3" />
             <p className="text-lg mb-2">Features</p>

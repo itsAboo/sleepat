@@ -5,12 +5,19 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import Header from "@/components/layout/header/header";
 import { Toaster } from "@/components/ui/toaster";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import Footer from "@/components/layout/footer/footer";
 
 interface RootLayoutProps {
   children: React.ReactNode;
 }
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export const metadata: Metadata = {
   title: "Sleep-at",
@@ -33,7 +40,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <ThemeProvider attribute="class" disableTransitionOnChange>
           <Header />
-          <div className="sm:container sm:mx-auto mx-2 min-h-screen">{children}</div>
+          <div className="sm:container sm:mx-auto mx-2 min-h-screen">
+            {children}
+          </div>
           <Footer />
           <Toaster />
         </ThemeProvider>
