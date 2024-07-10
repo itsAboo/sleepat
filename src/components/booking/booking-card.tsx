@@ -322,7 +322,7 @@ export default function BookingCard({ booking }: { booking: IBooking }) {
           </div>
         </CardContent>
       </Card>
-      <p className="xl:visible hidden text-right text-sm italic font-light -mt-3">
+      <p className="xl:block hidden text-right text-sm italic font-light -mt-3">
         created at {formatDate(booking.createdAt)}
       </p>
       <Modal
