@@ -53,21 +53,21 @@ export const GET = async (req: Request) => {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
   try {
-    // await dbConnect();
-    // const result = await Booking.find({
-    //   userId: user.id,
-    //   userEmail: user.email,
-    // })
-    //   .populate({
-    //     path: "userId",
-    //     select: "email firstName lastName address",
-    //     model: "User",
-    //   })
-    //   .lean();
-    // const bookings = (await Accommodation.populate(result, {
-    //   path: "accommodationId",
-    //   select: "name address city state country amenities image rooms",
-    // })) as IBookingDoc[];
+    await dbConnect();
+    const result = await Booking.find({
+      userId: user.id,
+      userEmail: user.email,
+    })
+      .populate({
+        path: "userId",
+        select: "email firstName lastName address",
+        model: "User",
+      })
+      .lean();
+    const bookings = (await Accommodation.populate(result, {
+      path: "accommodationId",
+      select: "name address city state country amenities image rooms",
+    })) as IBookingDoc[];
 
     // const formatBookings = bookings.map((booking) => {
     //   const room = booking.accommodationId.rooms.find(
@@ -86,7 +86,7 @@ export const GET = async (req: Request) => {
     //   };
     // });
 
-    return NextResponse.json({ bookings: [] }, { status: 200 });
+    return NextResponse.json({ bookings }, { status: 200 });
   } catch (error: any) {
     console.log(error);
     return NextResponse.json({ message: error.message }, { status: 500 });
