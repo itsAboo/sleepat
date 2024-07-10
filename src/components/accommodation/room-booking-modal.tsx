@@ -4,13 +4,12 @@ import { IAccommodation, IRoom } from "@/models/accommodation.model";
 import { Dialog, DialogContent, DialogOverlay } from "../ui/dialog";
 import { SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
-import { checkDateOverlap, formatPrice, formatRoomSize } from "@/util/format";
+import { formatPrice, formatRoomSize } from "@/util/format";
 import { amenitieIcon } from "@/util/amenities";
 import DateRangePicker from "./date-range-picker";
 import { DateRange } from "react-day-picker";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import { Button } from "../ui/button";
-import { ScrollArea } from "../ui/scroll-area";
 import { cn } from "@/lib/utils";
 import Loader from "../ui/loader";
 import { useToast } from "../ui/use-toast";
@@ -47,6 +46,7 @@ export default function RoomBookingModal({
       setError({ status: false, message: "" });
       setDate(undefined);
       setDays(1);
+      setTotalPrice(room.pricePerNight);
     }
   }, [open]);
 
@@ -85,24 +85,6 @@ export default function RoomBookingModal({
         ...prev,
         status: true,
         message: "Please select a date",
-      }));
-      return;
-    }
-    const roomBookingDates = accommodation.bookings?.map((booking) => ({
-      startDate: booking.startDate,
-      endDate: booking.endDate,
-    }));
-    const isDateOverlap = checkDateOverlap(
-      date.from,
-      date.to,
-      roomBookingDates!
-    );
-    if (isDateOverlap) {
-      setError((prev) => ({
-        ...prev,
-        status: true,
-        message:
-          "The selected dates for your booking overlap with an existing reservation",
       }));
       return;
     }
