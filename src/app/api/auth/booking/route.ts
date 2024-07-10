@@ -57,36 +57,35 @@ export const GET = async (req: Request) => {
     const result = await Booking.find({
       userId: user.id,
       userEmail: user.email,
-    })
-      .populate({
-        path: "userId",
-        select: "email firstName lastName address",
-        model: "User",
-      })
-      .lean();
+    }).populate({
+      path: "userId",
+      select: "email firstName lastName address",
+      model: "User",
+    });
+    console.log("result---------", result);
     const bookings = (await Accommodation.populate(result, {
       path: "accommodationId",
       select: "name address city state country amenities image rooms",
     })) as IBookingDoc[];
+    console.log("bookings---------", bookings);
+    const formatBookings = bookings.map((booking) => {
+      const room = booking.accommodationId.rooms.find(
+        (room) => room._id?.toString() === booking.roomId
+      );
+      return {
+        ...booking,
+        accommodation: booking.accommodationId,
+        accommodationId: undefined,
+        user: booking.userId,
+        userId: undefined,
+        userEmail: undefined,
+        ownerId: undefined,
+        roomId: undefined,
+        room: room,
+      };
+    });
 
-    // const formatBookings = bookings.map((booking) => {
-    //   const room = booking.accommodationId.rooms.find(
-    //     (room) => room._id?.toString() === booking.roomId
-    //   );
-    //   return {
-    //     ...booking,
-    //     accommodation: booking.accommodationId,
-    //     accommodationId: undefined,
-    //     user: booking.userId,
-    //     userId: undefined,
-    //     userEmail: undefined,
-    //     ownerId: undefined,
-    //     roomId: undefined,
-    //     room: room,
-    //   };
-    // });
-
-    return NextResponse.json({ bookings }, { status: 200 });
+    return NextResponse.json({ bookings: formatBookings }, { status: 200 });
   } catch (error: any) {
     console.log(error);
     return NextResponse.json({ message: error.message }, { status: 500 });
