@@ -3,6 +3,7 @@ import { validateRequest } from "@/lib/lucia";
 import Booking from "@/models/booking.model";
 import { NextResponse } from "next/server";
 import Accommodation, { IRoom } from "@/models/accommodation.model";
+import User from "@/models/user.model";
 
 interface IBookingDoc {
   _id: string;
@@ -54,21 +55,26 @@ export const GET = async (req: Request) => {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
   try {
-    const result = await Booking.find({
+    const bookings = await Booking.find({
       userId: user.id,
       userEmail: user.email,
-    }).populate({
+    });
+
+    const bookingsWithUser = await User.populate(bookings, {
       path: "userId",
       select: "email firstName lastName address",
       model: "User",
     });
-    console.log("result---------", result);
-    const bookings = (await Accommodation.populate(result, {
-      path: "accommodationId",
-      select: "name address city state country amenities image rooms",
-    })) as IBookingDoc[];
-    console.log("bookings---------", bookings);
-    const formatBookings = bookings.map((booking) => {
+
+    const bookingsWithUserAndAccommodation = (await Accommodation.populate(
+      bookingsWithUser,
+      {
+        path: "accommodationId",
+        select: "name address city state country amenities image rooms",
+      }
+    )) as IBookingDoc[];
+
+    const formatBookings = bookingsWithUserAndAccommodation.map((booking) => {
       const room = booking.accommodationId.rooms.find(
         (room) => room._id?.toString() === booking.roomId
       );
