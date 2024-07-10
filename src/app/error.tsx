@@ -11,7 +11,9 @@ export default function ErrorPage({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.log("error ja")
+    console.log("error ja");
+    console.log(error.message);
+    console.log(error.digest);
     console.error(error);
   }, [error]);
   return (
