@@ -7,7 +7,8 @@ import Header from "@/components/layout/header/header";
 import { Toaster } from "@/components/ui/toaster";
 import { Metadata, Viewport } from "next";
 import Footer from "@/components/layout/footer/footer";
-import ResetZoom from "@/components/layout/reset-zoom";
+import ResetScroll from "@/components/layout/reset-scroll";
+
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -44,7 +45,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <div className="sm:container sm:mx-auto mx-2 min-h-screen">
             {children}
           </div>
-          <ResetZoom />
+          <ResetScroll />
           <Footer />
           <Toaster />
         </ThemeProvider>

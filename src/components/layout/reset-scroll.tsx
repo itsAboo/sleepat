@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-export default function ResetZoom() {
+export default function ResetScroll() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.scrollTo(0, 0);
