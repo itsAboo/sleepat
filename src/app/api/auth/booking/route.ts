@@ -40,6 +40,7 @@ interface IBookingDoc {
 }
 
 export const GET = async (req: Request) => {
+  await dbConnect();
   if (!req.headers.get("Authorization")) {
     return NextResponse.json(
       { message: "Authorization is required" },
@@ -53,7 +54,6 @@ export const GET = async (req: Request) => {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
   try {
-    await dbConnect();
     const result = await Booking.find({
       userId: user.id,
       userEmail: user.email,
