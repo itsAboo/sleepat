@@ -1,5 +1,5 @@
 import { getUser } from "@/lib/lucia";
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default async function AccountAuthLayout({
   children,
@@ -8,7 +8,7 @@ export default async function AccountAuthLayout({
 }) {
   const { user } = await getUser();
   if (!user) {
-    return notFound();
+    return redirect("/account/signin");
   }
   return children;
 }
