@@ -25,11 +25,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+**Install package** 
 
 ```
 npm install
 ```
+
+**Run the development server** 
 
 ```
 npm run dev
