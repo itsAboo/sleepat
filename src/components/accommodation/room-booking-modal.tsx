@@ -298,7 +298,7 @@ export default function RoomBookingModal({
                 {days} Day{days > 1 && "s"}
               </span>
             </h1>
-            <Button onClick={handleBooking} className="w-full mt-5">
+            <Button disabled={isLoading} onClick={handleBooking} className="w-full mt-5">
               {isLoading ? <Loader /> : "Book now"}
             </Button>
           </div>
